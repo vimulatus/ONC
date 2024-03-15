@@ -156,6 +156,7 @@ function MoreTools() {
             <ChartTool />
             <HeadingTool />
             <BasicSection group={tools} />
+            <PageTool />
         </Section>
     )
 }
