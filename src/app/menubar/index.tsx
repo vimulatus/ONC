@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { BookOpen, PenSquare, SquareSplitHorizontal, Download, RotateCcw } from 'lucide-react';
 
 function MenubarItem({children}: Readonly<{children: React.ReactNode}>) {
@@ -13,7 +14,9 @@ function MenubarItem({children}: Readonly<{children: React.ReactNode}>) {
 
 export default function Menubar() {
     return (
-        <div className='flex flex-row border-b-2 justify-between'>
+        <div>
+
+        <div className='flex flex-row justify-between'>
             <div className='flex flex-row m-1'>
                 <Button variant="outline" className='text-sm mx-2'>
                     New
@@ -41,39 +44,7 @@ export default function Menubar() {
             </MenubarItem>
             </div>
         </div>
-
-        // <MenuBar>
-        //     <MenuBarMenu>
-        //     <MenuBarTrigger>
-        //         <BookOpen />
-        //     </MenuBarTrigger>
-        //     </MenuBarMenu>
-        //     <MenuBarMenu>
-        //     <MenuBarTrigger>
-        //         <PenSquare />
-        //     </MenuBarTrigger>
-        //     </MenuBarMenu>
-        //     <MenuBarMenu>
-        //     <MenuBarTrigger>
-        //         <SquareSplitHorizontal />
-        //     </MenuBarTrigger>
-        //     </MenuBarMenu>
-        //     <MenuBarMenu>
-        //     <MenuBarTrigger>
-        //         <Download />
-        //         <MenuBarContent>
-        //             <MenuBarItem>
-        //                 PDF
-        //             </MenuBarItem>
-        //             <MenuBarItem>
-        //                 MDX
-        //             </MenuBarItem>
-        //             <MenuBarItem>
-        //                 Image
-        //             </MenuBarItem>
-        //         </MenuBarContent>
-        //     </MenuBarTrigger>
-        //     </MenuBarMenu>
-        // </MenuBar>    
+        <Separator />
+        </div>
     )
 }

@@ -4,6 +4,8 @@ import * as React from "react"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
 
 import { cn } from "@/lib/utils"
+import AddTooltip, { TooltipButton } from "../tooltip"
+import { Button } from "./button"
 
 const Popover = PopoverPrimitive.Root
 
@@ -29,3 +31,32 @@ const PopoverContent = React.forwardRef<
 PopoverContent.displayName = PopoverPrimitive.Content.displayName
 
 export { Popover, PopoverTrigger, PopoverContent }
+
+
+export function PopoverButton({
+  tooltip,
+  children,
+  className
+}: {
+  tooltip?: string,
+  children: React.ReactNode,
+  className?: string
+}) {
+  if (tooltip) {
+    return (
+      <TooltipButton className={className} tooltip={tooltip}>
+        <Popover>
+          {children}
+        </Popover>
+      </TooltipButton>
+    )
+  } else {
+    return (
+      <Button className={className} variant="ghost">
+        <Popover>
+          {children}
+        </Popover>
+      </Button>
+    )
+  }
+}
