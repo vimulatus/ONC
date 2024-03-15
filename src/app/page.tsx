@@ -8,7 +8,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="h-[93vh]">
+    <div>
       {/* <ResizablePanelGroup direction="horizontal" className="mt-1">
         <ResizablePanel>
           <Editor />

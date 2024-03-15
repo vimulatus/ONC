@@ -23,9 +23,9 @@ function AddSeperator() {
 
 function Extra({children}: {children: React.ReactNode}) {
     return (
-        <PopoverButton className="mx-0 px-0">
+        <PopoverButton className="mx-0 px-1">
                     <PopoverTrigger>
-                        <Icon name="ChevronDown" />
+                        <Icon name="Plus" />
                     </PopoverTrigger>
                     <PopoverContent onOpenAutoFocus={e => e.preventDefault()} className="items-center justify-center">
                         {children}
@@ -52,10 +52,10 @@ function BasicFormattingGroup() {
             <FontSize />
 
             <Extra>
-                <BasicSection group={hidden} />
+                <BasicSection group={hidden} className="mb-4" />
                 <Separator />
                 <Section>
-                    <PopoverButton>
+                    <PopoverButton className="mt-4">
                         <PopoverTrigger className="flex items-center justify-center">
                                 <span className="text-lg">Font Style</span>
                                 <Icon size={18} name="ChevronRight" />
