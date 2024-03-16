@@ -4,9 +4,11 @@ import { Section } from "@/components/ui/section"
 
 export default function Editor() {
     return (
-        <div>
+        <div className="flex flex-col">
             <Toolbar />
-            <Canvas />
+            <div className="flex flex-row justify-center items-center">
+                <Canvas />
+            </div>
         </div>
     )
 }
