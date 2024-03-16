@@ -7,13 +7,15 @@ import {
     PopoverContent 
 } from "@/components/ui/popover"
 import React from "react"
-import { Button } from '@/components/ui/button'
 import { Separator } from "@/components/ui/separator"
 import { BasicSection, Section, ToggleSection } from "@/components/ui/section"
 import { PresetColor } from "react-color/lib/components/sketch/Sketch"
 import FontSize from "@/components/ui/fontSize"
-import {TooltipButton} from "@/components/tooltip"
 import { BasicToolBuilder } from "@/components/ui/tool"
+
+function notify() {
+    
+}
 
 function AddSeperator() {
     return (
