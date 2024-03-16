@@ -229,7 +229,7 @@ export default function Toolbar() {
                 <AddSeperator />
                 <BasicSection group={textColor} color={true} presetColors={presetColor} />
                 <AddSeperator />
-                <BasicSection group={align} />
+                <ToggleSection type="single" group={align} />
                 <AddSeperator />
                 <ListTool />
                 <AddSeperator />
