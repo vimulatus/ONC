@@ -43,26 +43,27 @@ pipelines:
             - docker
           artifacts:
             - "*.tar"
-      - step:
-          name: Upload to Docker
-          script:
-            - echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
-            - IMAGE_NAME=$BITBUCKET_REPO_SLUG
-            - docker load --input "${IMAGE_NAME}.tar"
-            - VERSION="prod-0.1.${BITBUCKET_BUILD_NUMBER}"
-            - IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
-            - docker tag "${IMAGE_NAME}" "vimulatus/doc-editor:${VERSION}"
-            - docker push "vimulatus/doc-editor:${VERSION}"
-          services:
-            - docker
-      - step:
-          name: Deploy to S3
-          deployment: production
-          script:
-          - pipe: atlassian/aws-s3-deploy:1.6.0
-            variables:
-              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY 
-              AWS_DEFAULT_REGION: 'ap-south-1'
-              S3_BUCKET: 'vimulatus-docker-bitbucket'
-              LOCAL_PATH: 'artifact'
+      - parallel:
+        - step:
+            name: Upload to Docker
+            script:
+              - echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+              - IMAGE_NAME=$BITBUCKET_REPO_SLUG
+              - docker load --input "${IMAGE_NAME}.tar"
+              - VERSION="prod-0.1.${BITBUCKET_BUILD_NUMBER}"
+              - IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
+              - docker tag "${IMAGE_NAME}" "vimulatus/doc-editor:${VERSION}"
+              - docker push "vimulatus/doc-editor:${VERSION}"
+            services:
+              - docker
+        - step:
+            name: Deploy to S3
+            deployment: production
+            script:
+            - pipe: atlassian/aws-s3-deploy:1.6.0
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY 
+                AWS_DEFAULT_REGION: 'ap-south-1'
+                S3_BUCKET: 'vimulatus-docker-bitbucket'
+                LOCAL_PATH: 'artifact'
