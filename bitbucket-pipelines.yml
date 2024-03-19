@@ -65,3 +65,4 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY 
                 AWS_DEFAULT_REGION: 'ap-south-1'
                 S3_BUCKET: 'vimulatus-docker-bitbucket'
+                LOCAL_PATH: './'
