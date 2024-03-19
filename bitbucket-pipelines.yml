@@ -34,7 +34,7 @@ pipelines:
       - step:
           name: Build and Test
           script:
-            - IMAGE_NAME=$BITBUCKET_REPO_SLUG
+            - IMAGE_NAME=doc-editor
             - docker build . --file Dockerfile --tag ${IMAGE_NAME}
             - docker save ${IMAGE_NAME} --output "${IMAGE_NAME}.tar"
           services:
@@ -42,14 +42,14 @@ pipelines:
           caches:
             - docker
           artifacts:
-            - "artifact/*"
+            - "*.tar"
       - parallel:
         - step:
             name: Upload to Docker
             script:
               - echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
-              - IMAGE_NAME=$BITBUCKET_REPO_SLUG
-              - docker load --input "artifact/${IMAGE_NAME}.tar"
+              - IMAGE_NAME=doc-editor
+              - docker load --input "${IMAGE_NAME}.tar"
               - VERSION="prod-0.1.${BITBUCKET_BUILD_NUMBER}"
               - docker tag "${IMAGE_NAME}" "vimulatus/doc-editor:${VERSION}"
               - docker push "vimulatus/doc-editor:${VERSION}"
@@ -65,4 +65,3 @@ pipelines:
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY 
                 AWS_DEFAULT_REGION: 'ap-south-1'
                 S3_BUCKET: 'vimulatus-docker-bitbucket'
-                LOCAL_PATH: 'artifact'
